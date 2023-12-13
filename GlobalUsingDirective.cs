@@ -1,0 +1,9 @@
+﻿global using MeetingLogger.Data;
+global using MeetingLogger.Models;
+global using MeetingLogger.Models.ViewModels;
+global using Microsoft.AspNetCore.Identity;
+global using Microsoft.AspNetCore.Mvc;
+global using Microsoft.Data.SqlClient;
+global using Microsoft.EntityFrameworkCore;
+global using System.ComponentModel.DataAnnotations;
+global using System.Diagnostics;
