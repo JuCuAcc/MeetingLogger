@@ -1,5 +1,6 @@
 ﻿#nullable disable
-namespace MeetingLogger.Models;public partial class ProductsServiceTbl
+namespace MeetingLogger.Models;
+public partial class ProductsServiceTbl
 {
     public ProductsServiceTbl()
     {

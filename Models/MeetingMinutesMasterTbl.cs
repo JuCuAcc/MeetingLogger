@@ -1,5 +1,8 @@
 ﻿#nullable disable
-namespace MeetingLogger.Models;public partial class MeetingMinutesMasterTbl
+using System.ComponentModel.DataAnnotations.Schema;
+
+namespace MeetingLogger.Models;
+public partial class MeetingMinutesMasterTbl
 {
     public MeetingMinutesMasterTbl()
     {
@@ -8,11 +11,15 @@ namespace MeetingLogger.Models;public partial class MeetingMinutesMasterTbl
     public int Id { get; set; }
     public string CustomerType { get; set; }
     public string CustomerName { get; set; }
-    //public DateOnly? MeetingDate { get; set; }
-    //public TimeOnly? MeetingTime { get; set; }
 
-    public DateTime? MeetingDate { get; set; }
-    public DateTime? MeetingTime { get; set; }
+    [NotMapped]
+    public DateOnly? MeetingDate { get; set; }
+
+    [NotMapped]
+    public TimeOnly? MeetingTime { get; set; }
+
+    //public DateTime? MeetingDate { get; set; }
+    //public DateTime? MeetingTime { get; set; }
     public string MeetingPlace { get; set; }
     public string AttendsFromClientSide { get; set; }
     public string AttendsFromHostSide { get; set; }

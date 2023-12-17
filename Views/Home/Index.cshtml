@@ -36,7 +36,7 @@
             <div class="col-md-3"></div>
             <div class="col-md-5">
                 <label>Meeting Agenda</label>
-                <textarea asp-for="MeetingAgenda" class="form-control" placeholder="Meeting agenda  "></textarea>
+                <textarea asp-for="MeetingAgenda" class="form-control" placeholder="Meeting agenda"></textarea>
                 <span asp-validation-for="MeetingAgenda" class="text-danger"></span>
             </div>
         </div>
@@ -44,12 +44,12 @@
         <div class="row">
             <div class="col-md-2" style="display:flex; margin-bottom: 10px;">
                 <label style="margin-right: 10px;">Date</label>
-                <input asp-for="MeetingDate" class="form-control" type="date" />
+                <input asp-for="MeetingDate" class="form-control" type="date" id="meetingDateInput" />
                 <span asp-validation-for="MeetingDate" class="text-danger"></span>
             </div>
             <div class="col-md-2" style="display:flex; margin-bottom: 10px;">
                 <label style="margin-right: 10px;">Time</label>
-                <input asp-for="MeetingTime" class="form-control" type="time" />
+                <input asp-for="MeetingTime" class="form-control" type="time" id="meetingTimeInput" />
                 <span asp-validation-for="MeetingTime" class="text-danger"></span>
             </div>
         </div>
@@ -58,7 +58,7 @@
         <div class="row">
             <div class="col-md-4">
                 <label>Meeting Place:</label>
-                <input asp-for="MeetingPlace" class="form-control" placeholder="meeting place" />
+                <input asp-for="MeetingPlace" class="form-control" placeholder="meeting place" id="meetingPlaceInput" />
                 <span asp-validation-for="MeetingPlace" class="text-danger"></span>
             </div>
             <div class="col-md-3"></div>
@@ -295,20 +295,39 @@
             });
 
             // Save the form
-            $('#saveButton').click(function () {
-                var formData = $('form').serialize(); // Serialize the form data
+            $('#saveButton').on('click', function () {
+                var meetingData = {
+                    CustomerType: $("input[name='customerType']:checked").val(),
+                    CustomerName: $("#customerNamesDropdown").val(),
+                    MeetingAgenda: $("textarea[name='MeetingAgenda']").val(),
+                    MeetingDate: $("#meetingDateInput").val(), 
+                    MeetingTime: $("#meetingTimeInput").val(), 
+                    MeetingPlace: $("#meetingPlaceInput").val(),
+                    AttendsFromClientSide: $("textarea[name='AttendsFromClientSide']").val(),
+                    AttendsFromHostSide: $("textarea[name='AttendsFromHostSide']").val(),
+                    MeetingDiscussion: $("textarea[name='MeetingDiscussion']").val(),
+                    MeetingDecision: $("textarea[name='MeetingDecision']").val()
+                };
 
+                var productData = {
+                    ProductId: $("#productNamesDropdown").val(),
+                    Quantity: $("#quantity").val(),
+                    Unit: $("#unit").val()
+                };
+
+                // AJAX request to execute the stored procedures
                 $.ajax({
                     url: '/api/Meeting/SaveMeetingMinutes',
-                    type: 'POST',
-                    data: formData,
-                    success: function (response) {
-                        // Handle success response
-                        console.log('Meeting data saved:', response);
+                    method: 'POST',
+                    data: {
+                        meetingMinutesMasterTbl: meetingData,
+                        meetingMinutesDetailsTbl: productData
                     },
-                    error: function (error) {
-                        // Handle error response
-                        console.error('Error saving meeting data:', error);
+                    success: function (response) {
+                        console.log('Stored procedures executed successfully.');
+                    },
+                    error: function (xhr, status, error) {
+                        console.error('Error executing stored procedures:', error);
                     }
                 });
             });

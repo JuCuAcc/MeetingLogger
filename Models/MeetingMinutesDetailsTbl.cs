@@ -1,5 +1,6 @@
 ﻿#nullable disable
-namespace MeetingLogger.Models;public partial class MeetingMinutesDetailsTbl
+namespace MeetingLogger.Models;
+public partial class MeetingMinutesDetailsTbl
 {
     public int Id { get; set; }
     public int? MeetingId { get; set; }
