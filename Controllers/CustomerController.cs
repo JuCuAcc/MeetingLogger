@@ -17,16 +17,16 @@
         {
             if (customerType == "Corporate")
             {
-                var corporateCustomerNames = _context.MeetingMinutesMasterTbls
-                                            .Where(c => c.CustomerType == "Corporate")
+                var corporateCustomerNames = _context.CorporateCustomerTbls
                                             .Select(c => c.CustomerName).ToList();
+
                 return Ok(corporateCustomerNames);
             }
             else if (customerType == "Individual")
             {
-                var individualCustomerNames = _context.MeetingMinutesMasterTbls
-                                             .Where(c => c.CustomerType == "Individual")
+                var individualCustomerNames = _context.IndividualCustomerTbls
                                              .Select(c => c.CustomerName).ToList();
+
                 return Ok(individualCustomerNames);
             }
 

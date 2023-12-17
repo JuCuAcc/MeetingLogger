@@ -1,6 +1,7 @@
-﻿#nullable disable
-using MeetingLogger.Models;
-using Microsoft.EntityFrameworkCore;namespace MeetingLogger.Data;public partial class ApplicationDbContext : DbContext
+﻿#nullable disable
+
+namespace MeetingLogger.Data;
+public partial class ApplicationDbContext : DbContext
 {
     public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
     : base(options)
